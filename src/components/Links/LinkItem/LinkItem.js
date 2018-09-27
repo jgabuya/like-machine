@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
 	Card,
@@ -15,6 +15,8 @@ import { FaHeart, FaRegHeart, FaRegTrashAlt } from "react-icons/fa";
 import moment from "moment";
 import normalizeUrl from "normalize-url";
 
+import 'animate.css';
+
 const propTypes = {
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string,
@@ -30,73 +32,68 @@ const propTypes = {
 	onDelete: PropTypes.func.isRequired
 };
 
-const LinkItem = props => {
-	let likeIcon;
-    let likeBtnTitle;
-    let likeBtnOnClickHandler;
+class LinkItem extends Component {
+    state = {
+        animatedLike: false
+    }
 
-	if (props.liked) {
-        likeIcon = <FaHeart />;
-        likeBtnTitle = 'Unlike';
-        likeBtnOnClickHandler = props.onUnlike
-	} else {
-        likeIcon = <FaRegHeart />;
-        likeBtnTitle = "Like";
-        likeBtnOnClickHandler = props.onLike;
-	}
+    componentWillReceiveProps(nextProps) {        
+        this.setState({ 
+            animatedLike: nextProps.liked && !this.props.liked
+        });        
+    }
+    
+	render() {
+        let LikeIcon;
+        let likeBtnTitle;
+        let likeBtnOnClickHandler;
 
-	return (
-		<Card className="mb-5">
-			{props.imageUrl !== null && (
-				<CardImg
-					top
-					src={props.imageUrl}
-					alt={props.title || props.url}
-					style={{
-						width: "100%",
-						maxHeight: "20vw",
-						objectFit: "cover"
-					}}
-				/>
-			)}
+        if (this.props.liked) {
+            LikeIcon = FaHeart;
+            likeBtnTitle = 'Unlike';
+            likeBtnOnClickHandler = this.props.onUnlike
+        } else {
+            LikeIcon = FaRegHeart;
+            likeBtnTitle = "Like";
+            likeBtnOnClickHandler = this.props.onLike;
+        }
 
-			<CardBody>
-				<CardTitle>
-					<a target="_blank" href={normalizeUrl(props.url)}>
-						{props.title || props.url}
-					</a>
-				</CardTitle>
+        return <Card className="mb-5">
+				{this.props.imageUrl !== null && <CardImg top src={this.props.imageUrl} alt={this.props.title || this.props.url} style={{ width: "100%", maxHeight: "20vw", objectFit: "cover" }} />}
 
-				<CardSubtitle>{props.description}</CardSubtitle>
+				<CardBody>
+					<CardTitle>
+						<a target="_blank" href={normalizeUrl(this.props.url)}>
+							{this.props.title || this.props.url}
+						</a>
+					</CardTitle>
 
-				<CardText>
-					<small className="text-muted" title={props.createdAt}>
-						{moment(props.createdAt)
-							.startOf("day")
-							.fromNow()}
-					</small>
-				</CardText>
-			</CardBody>
+					<CardSubtitle>
+						{this.props.description}
+					</CardSubtitle>
 
-			<CardFooter>
-                <Button onClick={likeBtnOnClickHandler} outline color="primary" title={likeBtnTitle}>
-					{likeIcon} <small>{props.likeCount}</small>
-				</Button>
+					<CardText>
+						<small className="text-muted" title={this.props.createdAt}>
+							{moment(this.props.createdAt)
+								.startOf("day")
+								.fromNow()}
+						</small>
+					</CardText>
+				</CardBody>
 
-				{props.owned && (
-					<Button
-						onClick={props.onDelete}
-						outline
-						color="danger"
-                        className="float-right"
-                        title="Delete"
-					>
-						<FaRegTrashAlt />
+				<CardFooter>
+					<Button onClick={likeBtnOnClickHandler} outline color="primary" title={likeBtnTitle}>
+                    <LikeIcon className={(this.state.animatedLike)? 'animated bounce' : ''} /> <small>
+							{this.props.likeCount}
+						</small>
 					</Button>
-				)}
-			</CardFooter>
-		</Card>
-	);
+
+					{this.props.owned && <Button onClick={this.props.onDelete} outline color="danger" className="float-right" title="Delete">
+							<FaRegTrashAlt />
+						</Button>}
+				</CardFooter>
+			</Card>;
+    }
 };
 
 LinkItem.propTypes = propTypes;
