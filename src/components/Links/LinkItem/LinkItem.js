@@ -7,33 +7,49 @@ import {
     CardSubtitle,
     CardText,
     CardFooter,
-    Button
+    Button,
+    CardImg
 } from 'reactstrap';
 
 import moment from 'moment';
 import normalizeUrl from 'normalize-url';
 
 const propTypes = {
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    url: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    liked: PropTypes.bool.isRequired,
-    likeCount: PropTypes.number.isRequired,
-    owned: PropTypes.bool.isRequired,
-    onLike: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+	id: PropTypes.string.isRequired,
+	title: PropTypes.string,
+	description: PropTypes.string,
+	url: PropTypes.string.isRequired,
+	imageUrl: PropTypes.string,
+	createdAt: PropTypes.string.isRequired,
+	liked: PropTypes.bool.isRequired,
+	likeCount: PropTypes.number.isRequired,
+	owned: PropTypes.bool.isRequired,
+	onLike: PropTypes.func.isRequired,
+	onDelete: PropTypes.func.isRequired
 };
 
 const LinkItem = (props) => {        
     return (
         <Card className="mb-5">
-            <CardBody>
+            { props.imageUrl !== null &&
+                <CardImg 
+                    top src={ props.imageUrl } 
+                    alt={ props.title || props.url }
+                    style={{ 
+                        width: '100%',
+                        maxHeight: '20vw',
+                        objectFit: 'cover' 
+                    }} 
+                />
+            }
+
+            <CardBody>                
                 <CardTitle>
-                    <a target="_blank" href={ normalizeUrl(props.url) }>{ props.title }</a>
+                    <a target="_blank" href={ normalizeUrl(props.url) }>{ props.title || props.url }</a>
                 </CardTitle>
+                
                 <CardSubtitle>{ props.description }</CardSubtitle>
+                
                 <CardText>
                     <small className="text-muted">{ moment(props.createdAt).startOf('day').fromNow() }</small>
                 </CardText>

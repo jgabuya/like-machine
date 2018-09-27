@@ -15,6 +15,7 @@ const renderLinks = links => {
                 title={ item.title }
                 description={ item.description }
                 url={ item.url }
+                imageUrl={ item.image_url }
                 createdAt={ item.created_at }
                 liked={ item.liked }
                 likeCount={ item.like_count }

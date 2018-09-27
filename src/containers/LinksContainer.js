@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Links } from '../../components';
+import { Links } from '../components';
 import { connect } from 'react-redux';
-import fetchLinks from '../../store/actions/fetch-links';
+import fetchLinks from '../store/actions/fetch-links';
 
 class LinksContainer extends Component {
     componentDidMount() {        
