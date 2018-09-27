@@ -4,5 +4,6 @@ import {
 import linksReducer from './links-reducer';
 
 export default combineReducers({
-    links: linksReducer
+    links: linksReducer,
+    userIsLoggedIn: (state = false, action) => state
 })

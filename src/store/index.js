@@ -12,9 +12,7 @@ const initialState = {
     userIsLoggedIn: false
 };
 
-const middleware = [
-    thunk
-];
+const middleware = [thunk];
 
 export default createStore(
     rootReducer, 

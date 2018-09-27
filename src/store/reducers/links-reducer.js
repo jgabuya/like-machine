@@ -9,7 +9,7 @@ import {
 export default (state = {}, action) => {
     switch (action.type) {
         case FETCH_LINKS:
-            return action.payload.links;
+            return action.payload;
 
         case POST_LINK:
             return [
