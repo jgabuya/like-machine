@@ -51,7 +51,7 @@ const LinkItem = (props) => {
                 <CardSubtitle>{ props.description }</CardSubtitle>
                 
                 <CardText>
-                    <small className="text-muted">{ moment(props.createdAt).startOf('day').fromNow() }</small>
+                    <small className="text-muted" title={ props.createdAt }>{ moment(props.createdAt).startOf('day').fromNow() }</small>
                 </CardText>
             </CardBody>
 
