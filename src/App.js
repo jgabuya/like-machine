@@ -6,15 +6,10 @@ import {
     Form,
     FormGroup,
     Input,
-    Label,
-    Card,
-    CardBody,
-    CardTitle,
-    CardSubtitle,
-    CardText,
-    CardFooter,
-    Button
+    Label    
 } from 'reactstrap';
+
+import { LinksContainer } from './containers';
 
 class App extends Component {
     render() {
@@ -26,24 +21,9 @@ class App extends Component {
                     </Row>
 
                     { /* display form and link lists */ }
-                    <Row>
+                    <Row className="mt-4">
                         <Col md="8">
-                            <Card>
-                                <CardBody>
-                                    <CardTitle>
-                                        <a href="#">Link 1</a>
-                                    </CardTitle>
-                                    <CardSubtitle>Description goes here</CardSubtitle>
-                                    <CardText>
-                                        <small className="text-muted">by username 4 hours ago</small>
-                                    </CardText>
-                                </CardBody>
-
-                                <CardFooter>
-                                    <Button outline color="primary">Like</Button>
-                                    <Button outline color="danger" className="float-right">Delete</Button>
-                                </CardFooter>
-                            </Card> 
+                            <LinksContainer />
                         </Col>
 
                         <Col md="4">
