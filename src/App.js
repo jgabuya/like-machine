@@ -9,7 +9,7 @@ import {
     Label    
 } from 'reactstrap';
 
-import LinksContainer from './components/LinksContainer';
+import { LinksContainer } from './containers';
 
 class App extends Component {
     render() {
