@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Links } from "../components";
 
 import { connect } from "react-redux";
+import moment from "moment";
 import fetchLinks from "../store/actions/fetch-links";
 import deleteLink from "../store/actions/delete-link";
 import likeLink from "../store/actions/like-link";
@@ -9,8 +10,22 @@ import unlikeLink from "../store/actions/unlike-link";
 
 class LinksContainer extends Component {
 	componentDidMount() {
-		this.props.fetchLinks();
-	}
+        this.props.fetchLinks();        
+    }
+    
+    groupLinksByDate(links) {
+        return links.reduce((obj, curr) => {
+            const key = moment(moment(curr.created_at).format('MMMM D, YYYY')).unix();
+
+            if (typeof obj[key.toString()] === 'undefined') {
+                obj[key.toString()] = [];
+			}
+            
+            obj[key.toString()].push()
+
+            return obj;
+        }, {});
+    }
 
 	render() {
 		return (
@@ -37,3 +52,4 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(LinksContainer);
+
