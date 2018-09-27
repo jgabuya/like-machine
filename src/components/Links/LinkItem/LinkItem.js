@@ -26,7 +26,7 @@ const propTypes = {
     onDelete: PropTypes.func.isRequired
 };
 
-const LinkItem = (props) => {
+const LinkItem = (props) => {        
     return (
         <Card className="mb-5">
             <CardBody>
@@ -40,8 +40,8 @@ const LinkItem = (props) => {
             </CardBody>
 
             <CardFooter>
-                <Button onClick={ this.onLike } outline color="primary">Like</Button>
-                <Button onClick={ this.onDelete } outline color="danger" className="float-right">Delete</Button>
+                <Button onClick={ props.onLike } outline color="primary">Like</Button>
+                <Button onClick={ props.onDelete } outline color="danger" className="float-right">Delete</Button>
             </CardFooter>
         </Card> 
     );
