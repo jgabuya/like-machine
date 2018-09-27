@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Link from './Link';
+import LinkItem from './LinkItem';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
