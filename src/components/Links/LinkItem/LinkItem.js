@@ -26,19 +26,23 @@ const propTypes = {
 	likeCount: PropTypes.number.isRequired,
 	owned: PropTypes.bool.isRequired,
 	onLike: PropTypes.func.isRequired,
+	onUnlike: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired
 };
 
 const LinkItem = props => {
 	let likeIcon;
     let likeBtnTitle;
+    let likeBtnOnClickHandler;
 
 	if (props.liked) {
         likeIcon = <FaHeart />;
         likeBtnTitle = 'Unlike';
+        likeBtnOnClickHandler = props.onUnlike
 	} else {
         likeIcon = <FaRegHeart />;
         likeBtnTitle = "Like";
+        likeBtnOnClickHandler = props.onLike;
 	}
 
 	return (
@@ -75,7 +79,7 @@ const LinkItem = props => {
 			</CardBody>
 
 			<CardFooter>
-				<Button onClick={props.onLike} outline color="primary" title={likeBtnTitle}>
+                <Button onClick={likeBtnOnClickHandler} outline color="primary" title={likeBtnTitle}>
 					{likeIcon} <small>{props.likeCount}</small>
 				</Button>
 
