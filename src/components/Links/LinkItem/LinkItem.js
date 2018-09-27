@@ -10,6 +10,7 @@ import {
 	Button,
 	CardImg
 } from "reactstrap";
+import { FaHeart, FaRegHeart, FaRegTrashAlt } from "react-icons/fa";
 
 import moment from "moment";
 import normalizeUrl from "normalize-url";
@@ -29,6 +30,17 @@ const propTypes = {
 };
 
 const LinkItem = props => {
+	let likeIcon;
+    let likeBtnTitle;
+
+	if (props.liked) {
+        likeIcon = <FaHeart />;
+        likeBtnTitle = 'Unlike';
+	} else {
+        likeIcon = <FaRegHeart />;
+        likeBtnTitle = "Like";
+	}
+
 	return (
 		<Card className="mb-5">
 			{props.imageUrl !== null && (
@@ -63,8 +75,8 @@ const LinkItem = props => {
 			</CardBody>
 
 			<CardFooter>
-				<Button onClick={props.onLike} outline color="primary">
-					Like
+				<Button onClick={props.onLike} outline color="primary" title={likeBtnTitle}>
+					{likeIcon} <small>{props.likeCount}</small>
 				</Button>
 
 				{props.owned && (
@@ -72,9 +84,10 @@ const LinkItem = props => {
 						onClick={props.onDelete}
 						outline
 						color="danger"
-						className="float-right"
+                        className="float-right"
+                        title="Delete"
 					>
-						Delete
+						<FaRegTrashAlt />
 					</Button>
 				)}
 			</CardFooter>
