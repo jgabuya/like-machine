@@ -8,10 +8,11 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 const propTypes = {
 	links: PropTypes.array.isRequired,
 	onDelete: PropTypes.func.isRequired,
-	onLike: PropTypes.func.isRequired
+    onLike: PropTypes.func.isRequired,
+    onUnlike: PropTypes.func.isRequired
 };
 
-const renderLinks = (links, onLike, onDelete) => {
+const renderLinks = (links, onLike, onUnlike, onDelete) => {
 	return links.map((item, index) => {
 		return (
 			<LinkItem
@@ -27,7 +28,10 @@ const renderLinks = (links, onLike, onDelete) => {
 				owned={item.owned}
 				onLike={() => {
 					onLike(item.id);
-				}}
+                }}
+                onUnlike={() => {
+                    onUnlike(item.id);
+                }}
 				onDelete={() => {
 					confirmAlert({
 						title: "Confirm delete",
@@ -49,7 +53,7 @@ const renderLinks = (links, onLike, onDelete) => {
 };
 
 const Links = props => {
-	return <div>{renderLinks(props.links, props.onLike, props.onDelete)}</div>;
+	return <div>{renderLinks(props.links, props.onLike, props.onUnlike, props.onDelete)}</div>;
 };
 
 Links.propTypes = propTypes;
