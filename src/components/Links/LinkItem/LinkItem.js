@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import {
-    Card,
-    CardBody,
-    CardTitle,
-    CardSubtitle,
-    CardText,
-    CardFooter,
-    Button,
-    CardImg
-} from 'reactstrap';
+	Card,
+	CardBody,
+	CardTitle,
+	CardSubtitle,
+	CardText,
+	CardFooter,
+	Button,
+	CardImg
+} from "reactstrap";
 
-import moment from 'moment';
-import normalizeUrl from 'normalize-url';
+import moment from "moment";
+import normalizeUrl from "normalize-url";
 
 const propTypes = {
 	id: PropTypes.string.isRequired,
@@ -28,40 +28,59 @@ const propTypes = {
 	onDelete: PropTypes.func.isRequired
 };
 
-const LinkItem = (props) => {        
-    return (
-        <Card className="mb-5">
-            { props.imageUrl !== null &&
-                <CardImg 
-                    top src={ props.imageUrl } 
-                    alt={ props.title || props.url }
-                    style={{ 
-                        width: '100%',
-                        maxHeight: '20vw',
-                        objectFit: 'cover' 
-                    }} 
-                />
-            }
+const LinkItem = props => {
+	return (
+		<Card className="mb-5">
+			{props.imageUrl !== null && (
+				<CardImg
+					top
+					src={props.imageUrl}
+					alt={props.title || props.url}
+					style={{
+						width: "100%",
+						maxHeight: "20vw",
+						objectFit: "cover"
+					}}
+				/>
+			)}
 
-            <CardBody>                
-                <CardTitle>
-                    <a target="_blank" href={ normalizeUrl(props.url) }>{ props.title || props.url }</a>
-                </CardTitle>
-                
-                <CardSubtitle>{ props.description }</CardSubtitle>
-                
-                <CardText>
-                    <small className="text-muted" title={ props.createdAt }>{ moment(props.createdAt).startOf('day').fromNow() }</small>
-                </CardText>
-            </CardBody>
+			<CardBody>
+				<CardTitle>
+					<a target="_blank" href={normalizeUrl(props.url)}>
+						{props.title || props.url}
+					</a>
+				</CardTitle>
 
-            <CardFooter>
-                <Button onClick={ props.onLike } outline color="primary">Like</Button>
-                <Button onClick={ props.onDelete } outline color="danger" className="float-right">Delete</Button>
-            </CardFooter>
-        </Card> 
-    );
-}
+				<CardSubtitle>{props.description}</CardSubtitle>
+
+				<CardText>
+					<small className="text-muted" title={props.createdAt}>
+						{moment(props.createdAt)
+							.startOf("day")
+							.fromNow()}
+					</small>
+				</CardText>
+			</CardBody>
+
+			<CardFooter>
+				<Button onClick={props.onLike} outline color="primary">
+					Like
+				</Button>
+
+				{props.owned && (
+					<Button
+						onClick={props.onDelete}
+						outline
+						color="danger"
+						className="float-right"
+					>
+						Delete
+					</Button>
+				)}
+			</CardFooter>
+		</Card>
+	);
+};
 
 LinkItem.propTypes = propTypes;
 
