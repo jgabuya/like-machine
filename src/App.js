@@ -2,14 +2,10 @@ import React, { Component } from 'react';
 import {
     Container,
     Row,
-    Col,
-    Form,
-    FormGroup,
-    Input,
-    Label    
+    Col    
 } from 'reactstrap';
 
-import { LinksContainer } from './containers';
+import { LinksContainer, LinkFormContainer } from './containers';
 
 class App extends Component {
     render() {
@@ -27,24 +23,7 @@ class App extends Component {
                         </Col>
 
                         <Col md="4">
-                            <Form>
-                                <h4>New Link</h4>
-
-                                <FormGroup>
-                                    <Label for="input-title">Title</Label>
-                                    <Input type="text" id="input-title" />
-                                </FormGroup>
-
-                                <FormGroup>
-                                    <Label for="input-description">Description</Label>
-                                    <Input type="textarea" id="input-description" />
-                                </FormGroup>
-
-                                <FormGroup>
-                                    <Label for="input-title">URL</Label>
-                                    <Input type="text" id="input-title" />
-                                </FormGroup>
-                            </Form>
+                            <LinkFormContainer />
                         </Col>                    
                     </Row>
 
