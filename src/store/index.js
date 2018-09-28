@@ -9,7 +9,7 @@ import rootReducer from './reducers';
 
 const initialState = {
     links: [],
-    userIsLoggedIn: false
+    user: null
 };
 
 const middleware = [thunk];
