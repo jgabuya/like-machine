@@ -43,7 +43,7 @@ class LinksContainer extends Component {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = {
-    fetchLinks: fetchLinks,
+    fetchLinks,
     onDelete: deleteLink,
     onLike: likeLink,
     onUnlike: unlikeLink
