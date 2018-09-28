@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
-import {
-    Container,
-    Row,
-    Col    
-} from 'reactstrap';
+import React, { Component } from "react";
+import { Container, Row, Col } from "reactstrap";
 
-import { LinksContainer, LinkFormContainer } from './containers';
+import LinksContainer from "./containers/LinksContainer";
+import LinkFormContainer from "./containers/LinkFormContainer";
 
 class App extends Component {
     render() {
-         return (
+        return (
             <div className="App">
                 <Container>
                     <Row>
-                        <Col><h1>LikeMachine</h1></Col>
+                        <Col>
+                            <h1>LikeMachine</h1>
+                        </Col>
                     </Row>
 
-                    { /* display form and link lists */ }
+                    {/* display form and link lists */}
                     <Row className="mt-4">
                         <Col md="8">
                             <LinksContainer />
@@ -24,12 +23,12 @@ class App extends Component {
 
                         <Col md="4">
                             <LinkFormContainer />
-                        </Col>                    
+                        </Col>
                     </Row>
 
                     <Row className="mt-5">
                         <Col className="text-center text-muted">
-                            <small>&copy; { new Date().getFullYear() }</small>
+                            <small>&copy; {new Date().getFullYear()}</small>
                         </Col>
                     </Row>
                 </Container>
