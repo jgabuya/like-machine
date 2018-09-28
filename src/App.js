@@ -1,10 +1,30 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
-
+import FacebookLogin from "react-facebook-login";
 import LinksContainer from "./containers/LinksContainer";
 import LinkFormContainer from "./containers/LinkFormContainer";
 
+import { connect } from "react-redux";
+import authenticateUser from "./store/actions/authenticate-user";
+
 class App extends Component {
+    renderSidebar() {
+        let sidebar;
+
+        if (this.props.user === null) {
+            sidebar = (<FacebookLogin
+                appId="1901771459907068"
+                autoLoad={true}
+                fields="name,email"
+                callback={this.props.onAuthenticateUser}
+            />);
+        } else {
+            sidebar = <LinkFormContainer />;
+        }
+        
+        return sidebar;            
+    }
+
     render() {
         return (
             <div className="App">
@@ -22,7 +42,7 @@ class App extends Component {
                         </Col>
 
                         <Col md="4">
-                            <LinkFormContainer />
+                            {this.renderSidebar()}
                         </Col>
                     </Row>
 
@@ -37,4 +57,10 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => state;
+
+const mapDispatchToProps = {
+    onAuthenticateUser: authenticateUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

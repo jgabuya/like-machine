@@ -21,6 +21,7 @@ class LinksContainer extends Component {
                     className="mb-5"
                     key={index}
                     linkGroup={item}
+                    user={this.props.user}
                     onDelete={this.props.onDelete}
                     onLike={this.props.onLike}
                     onUnlike={this.props.onUnlike}
@@ -43,7 +44,7 @@ class LinksContainer extends Component {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = {
-    fetchLinks: fetchLinks,
+    fetchLinks,
     onDelete: deleteLink,
     onLike: likeLink,
     onUnlike: unlikeLink
