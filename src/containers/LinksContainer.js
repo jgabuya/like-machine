@@ -21,6 +21,7 @@ class LinksContainer extends Component {
                     className="mb-5"
                     key={index}
                     linkGroup={item}
+                    user={this.props.user}
                     onDelete={this.props.onDelete}
                     onLike={this.props.onLike}
                     onUnlike={this.props.onUnlike}

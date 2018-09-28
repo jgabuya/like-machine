@@ -9,13 +9,14 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 const propTypes = {
     linkGroup: PropTypes.object.isRequired,
+    user: PropTypes.any,
     onDelete: PropTypes.func.isRequired,
     onLike: PropTypes.func.isRequired,
     onUnlike: PropTypes.func.isRequired
 };
 
-const renderLinks = (links, onLike, onUnlike, onDelete) => {
-    return links.map((item, index) => {
+const renderLinks = props => {
+    return props.links.map((item, index) => {
         return (
             <LinkItem
                 key={index}
@@ -28,11 +29,12 @@ const renderLinks = (links, onLike, onUnlike, onDelete) => {
                 liked={item.liked}
                 likeCount={item.like_count}
                 owned={item.owned}
+                user={props.user}
                 onLike={() => {
-                    onLike(item.id);
+                    props.onLike(item.id);
                 }}
                 onUnlike={() => {
-                    onUnlike(item.id);
+                    props.onUnlike(item.id);
                 }}
                 onDelete={() => {
                     confirmAlert({
@@ -41,7 +43,7 @@ const renderLinks = (links, onLike, onUnlike, onDelete) => {
                         buttons: [
                             {
                                 label: "Yes",
-                                onClick: () => onDelete(item.id)
+                                onClick: () => props.onDelete(item.id)
                             },
                             {
                                 label: "No"
@@ -61,12 +63,13 @@ const LinkGroup = props => {
                 {moment.unix(props.linkGroup.timestamp).format("MMMM D, YYYY")}
             </h4>
 
-            {renderLinks(
-                sortLinksByLikeCountDesc(props.linkGroup.links),
-                props.onLike,
-                props.onUnlike,
-                props.onDelete
-            )}
+            {renderLinks({
+                links: sortLinksByLikeCountDesc(props.linkGroup.links),
+                user: props.user,
+                onLike: props.onLike,
+                onUnlike: props.onUnlike,
+                onDelete: props.onDelete
+            })}
         </div>
     );
 };
