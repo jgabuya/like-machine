@@ -18,7 +18,8 @@
     "react-scripts": "1.1.5",
     "reactstrap": "^6.4.0",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "redux-devtools-extension": "^2.13.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,8 +29,7 @@
   },
   "devDependencies": {
     "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "^1.5.0",
-    "redux-devtools-extension": "^2.13.5",
+    "enzyme-adapter-react-16": "^1.5.0",    
     "redux-mock-store": "^1.5.3"
   }
 }
