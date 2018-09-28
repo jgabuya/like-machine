@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import LinkItem from "./LinkItem";
 
+import { sortLinksByLikeCountDesc } from "../util/data-operations";
 import moment from "moment";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -61,7 +62,7 @@ const LinkGroup = props => {
             </h4>
 
             {renderLinks(
-                props.linkGroup.links,
+                sortLinksByLikeCountDesc(props.linkGroup.links),
                 props.onLike,
                 props.onUnlike,
                 props.onDelete
