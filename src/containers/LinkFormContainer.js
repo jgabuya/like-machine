@@ -19,15 +19,14 @@ class LinkFormContainer extends Component {
     }
 
     render() {
-        return (
-            <LinkForm
-                onUrlChange={this.onUrlChange}
-                onSubmit={e => {
-                    e.preventDefault();
-                    this.props.onSubmit(this.state);
-                }}
-            />
-        );
+        return <div>
+            <p className="text-muted">Welcome, {this.props.user.name}</p>
+
+                <LinkForm className="mt-4" onUrlChange={this.onUrlChange} onSubmit={e => {
+                        e.preventDefault();
+                        this.props.onSubmit(this.state);
+                    }} />
+            </div>;
     }
 }
 
