@@ -32,6 +32,24 @@ const propTypes = {
 };
 
 class LinkItem extends Component {
+    /* 
+    This was originally intented to be a pure/presentational component with props as the only data source
+    however there was a bug (https://github.com/jgabuya/like-machine/issues/9) where a link item "jumps"
+    on top of the list when "liked". It's because the like button click handler (passed down as prop) fires a 
+    redux action, which generates a new state tree and triggers a re-render of the parent container component 
+    LinksContainer as it subscribes to store state changes
+    
+    button click -> fire redux action -> reducer changes "liked" property of target object -> LinksContainer re-renders
+    
+    The solution I arrived at is:
+    
+    1. Contain internal state that tells whether user "likes" or "unlikes" the
+    item. 
+    2. Make the reducer NOT update the "liked" prop of target object in state tree, while at the same time still 
+    calling the "like" API endpoint so the item will retain the "liked" status on the next refresh
+
+    This way, when a user clicks on the "like" button the parent LinksContainer will not re-render
+    */
     state = {
         liked: false,
         likeCount: 0,
@@ -168,7 +186,7 @@ class LinkItem extends Component {
                     </CardFooter>
                 )}
             </Card>
-        );        
+        );
     }
 }
 
