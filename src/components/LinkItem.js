@@ -13,7 +13,6 @@ import {
 import { FaHeart, FaRegHeart, FaRegTrashAlt } from "react-icons/fa";
 
 import moment from "moment";
-import normalizeUrl from "normalize-url";
 
 import "animate.css";
 
@@ -65,15 +64,18 @@ class LinkItem extends Component {
 
     onLikeButtonClick() {
         // toggle liked state
-        this.setState({
-            liked: !this.state.liked,
-            likeButtonHasBeenClickedOnce: true
-        }, (state) => {
-            this.updateLikeCount();
+        this.setState(
+            {
+                liked: !this.state.liked,
+                likeButtonHasBeenClickedOnce: true
+            },
+            () => {
+                this.updateLikeCount();
 
-            if (this.state.liked) this.props.onLike();
-            else this.props.onUnlike();    
-        });
+                if (this.state.liked) this.props.onLike();
+                else this.props.onUnlike();
+            }
+        );
     }
 
     renderLikeBtn() {
@@ -96,7 +98,12 @@ class LinkItem extends Component {
                 title={likeBtnTitle}
             >
                 <LikeIcon
-                    className={this.state.liked && this.state.likeButtonHasBeenClickedOnce ? "animated bounce" : ""}
+                    className={
+                        this.state.liked &&
+                        this.state.likeButtonHasBeenClickedOnce
+                            ? "animated bounce"
+                            : ""
+                    }
                 />{" "}
                 <small>{this.state.likeCount}</small>
             </Button>
@@ -123,7 +130,7 @@ class LinkItem extends Component {
                 {/* Item details */}
                 <CardBody>
                     <CardTitle>
-                        <a target="_blank" href={normalizeUrl(this.props.url)}>
+                        <a target="_blank" href={this.props.url}>
                             {this.props.title || this.props.url}
                         </a>
                     </CardTitle>
@@ -161,7 +168,7 @@ class LinkItem extends Component {
                     </CardFooter>
                 )}
             </Card>
-        );
+        );        
     }
 }
 

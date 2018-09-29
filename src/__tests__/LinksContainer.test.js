@@ -1,8 +1,9 @@
 import React from "react";
 import LinksContainer from "../containers/LinksContainer";
 import { shallow } from "enzyme";
-import toJSON from "enzyme-to-json";
+import thunk from "redux-thunk";
 import configureStore from "redux-mock-store";
+import renderer from "react-test-renderer";
 
 describe("LinksContainer", () => {
     let wrapper;
@@ -10,7 +11,7 @@ describe("LinksContainer", () => {
     const initialState = { links: [], user: null, formData: { url: "" } };
 
     beforeEach(() => {
-        store = configureStore()(initialState);
+        store = configureStore([thunk])(initialState);
         wrapper = shallow(<LinksContainer store={store} />);
     });
 
@@ -19,6 +20,7 @@ describe("LinksContainer", () => {
     });
 
     it("matches snapshot", () => {
-        expect(toJSON(wrapper)).toMatchSnapshot();
+        const tree = renderer.create(<LinksContainer store={store} />).toJSON();
+        expect(tree).toMatchSnapshot();
     });
 });
