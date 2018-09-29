@@ -34,32 +34,79 @@ const propTypes = {
 
 class LinkItem extends Component {
     state = {
-        animatedLike: false
+        liked: false,
+        likeCount: 0,
+        likeButtonHasBeenClickedOnce: false // tells whether the like button has been clicked at least once
     };
+
+    constructor(props) {
+        super(props);
+
+        this.onLikeButtonClick = this.onLikeButtonClick.bind(this);
+    }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            animatedLike: nextProps.liked && !this.props.liked
+            liked: nextProps.liked,
+            likeCount: nextProps.likeCount
         });
     }
 
-    render() {
+    updateLikeCount() {
+        let likeCount = this.state.likeCount;
+
+        if (this.state.liked) likeCount++;
+        else likeCount--;
+
+        this.setState({
+            likeCount
+        });
+    }
+
+    onLikeButtonClick() {
+        // toggle liked state
+        this.setState({
+            liked: !this.state.liked,
+            likeButtonHasBeenClickedOnce: true
+        }, (state) => {
+            this.updateLikeCount();
+
+            if (this.state.liked) this.props.onLike();
+            else this.props.onUnlike();    
+        });
+    }
+
+    renderLikeBtn() {
         let LikeIcon;
         let likeBtnTitle;
-        let likeBtnOnClickHandler;
 
-        if (this.props.liked) {
+        if (this.state.liked) {
             LikeIcon = FaHeart;
             likeBtnTitle = "Unlike";
-            likeBtnOnClickHandler = this.props.onUnlike;
         } else {
             LikeIcon = FaRegHeart;
             likeBtnTitle = "Like";
-            likeBtnOnClickHandler = this.props.onLike;
         }
 
         return (
+            <Button
+                onClick={this.onLikeButtonClick}
+                outline
+                color="primary"
+                title={likeBtnTitle}
+            >
+                <LikeIcon
+                    className={this.state.liked && this.state.likeButtonHasBeenClickedOnce ? "animated bounce" : ""}
+                />{" "}
+                <small>{this.state.likeCount}</small>
+            </Button>
+        );
+    }
+
+    render() {
+        return (
             <Card className="mb-5">
+                {/*  Item image */}
                 {this.props.imageUrl !== null && (
                     <CardImg
                         top
@@ -73,6 +120,7 @@ class LinkItem extends Component {
                     />
                 )}
 
+                {/* Item details */}
                 <CardBody>
                     <CardTitle>
                         <a target="_blank" href={normalizeUrl(this.props.url)}>
@@ -94,23 +142,10 @@ class LinkItem extends Component {
                     </CardText>
                 </CardBody>
 
+                {/* Action buttons */}
                 {this.props.user && (
                     <CardFooter>
-                        <Button
-                            onClick={likeBtnOnClickHandler}
-                            outline
-                            color="primary"
-                            title={likeBtnTitle}
-                        >
-                            <LikeIcon
-                                className={
-                                    this.state.animatedLike
-                                        ? "animated bounce"
-                                        : ""
-                                }
-                            />{" "}
-                            <small>{this.props.likeCount}</small>
-                        </Button>
+                        {this.renderLikeBtn()}
 
                         {this.props.owned && (
                             <Button

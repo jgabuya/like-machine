@@ -20,28 +20,8 @@ export default (state = {}, action) => {
             });
 
         case LIKE_LINK:
-            return state.map(item => {
-                if (item.id === action.payload.id) {
-                    return Object.assign(item, {
-                        liked: true,
-                        like_count: ++item.like_count
-                    });
-                }
-
-                return item;
-            });
-
         case UNLIKE_LINK:
-            return state.map(item => {
-                if (item.id === action.payload.id) {
-                    return Object.assign(item, {
-                        liked: false,
-                        like_count: --item.like_count
-                    });
-                }
-
-                return item;
-            });
+            return state;
 
         default:
             return state;
