@@ -1,26 +1,27 @@
-import {
-    createStore,
-    applyMiddleware
-} from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
 
-import rootReducer from './reducers';
+import rootReducer from "./reducers";
 
-const initialState = {
-    links: [],
-    user: null,
-    formData: {
-        url: ''
-    }
-};
+let store;
 
-const middleware = [thunk];
+if (!store) {
+    const initialState = {
+        links: [],
+        user: null,
+        formData: {
+            url: ""
+        }
+    };
 
-export default createStore(
-    rootReducer, 
-    initialState, 
-    composeWithDevTools(
-        applyMiddleware(...middleware)
-    )
-);
+    const middleware = [thunk];
+
+    store = createStore(
+        rootReducer,
+        initialState,
+        composeWithDevTools(applyMiddleware(...middleware))
+    );
+}
+
+export default store;
