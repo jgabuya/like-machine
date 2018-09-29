@@ -5,6 +5,8 @@ import LinkItem from "./LinkItem";
 import { sortLinksByLikeCountDesc } from "../util/data-operations";
 import moment from "moment";
 import { confirmAlert } from "react-confirm-alert";
+import normalizeUrl from "normalize-url";
+
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 const propTypes = {
@@ -23,7 +25,7 @@ const renderLinks = props => {
                 id={item.id}
                 title={item.title}
                 description={item.description}
-                url={item.url}
+                url={normalizeUrl(item.url)}
                 imageUrl={item.image_url}
                 createdAt={item.created_at}
                 liked={item.liked}
