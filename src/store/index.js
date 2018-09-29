@@ -9,7 +9,10 @@ import rootReducer from './reducers';
 
 const initialState = {
     links: [],
-    user: null
+    user: null,
+    formData: {
+        url: ''
+    }
 };
 
 const middleware = [thunk];
