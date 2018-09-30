@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinkForm matches snapshot 1`] = `
+<div>
+  <form
+    className=""
+    onSubmit={[Function]}
+  >
+    <h4>
+      New Link
+    </h4>
+    <div
+      className="position-relative form-group"
+    >
+      <label
+        className=""
+        htmlFor="input-title"
+      >
+        URL
+      </label>
+      <input
+        className="form-control"
+        id="input-title"
+        onChange={[Function]}
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="position-relative form-group"
+    >
+      <button
+        className="btn btn-primary"
+        onClick={[Function]}
+        type={undefined}
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+`;

@@ -5,16 +5,6 @@ import postLink from "../store/actions/post-link";
 import updateFormData from "../store/actions/update-form-data";
 
 class LinkFormContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.onUrlChange = this.onUrlChange.bind(this);
-    }
-
-    onUrlChange(e) {
-        this.setState({ url: e.target.value });
-    }
-
     render() {
         return (
             <div>

@@ -10,7 +10,7 @@ describe("LinkItem", () => {
         description: "test",
         url: "google.com/",
         imageUrl: "",
-        createdAt: new Date().toISOString(),
+        createdAt: new Date('January 1, 1970').toISOString(),
         liked: false,
         likeCount: 0,
         owned: false,
@@ -19,14 +19,14 @@ describe("LinkItem", () => {
         onDelete: jest.fn()
     };
 
-    const wrapper = shallow(
-        <LinkItem {...props} />
-    );
+    const component = <LinkItem {...props} />;
 
-    // it("matches snapshot", () => {
-    //     const tree = renderer.create(<LinkItem {...props} />).toJSON();
-    //     expect(tree).toMatchSnapshot();
-    // });
+    const wrapper = shallow(component);
+
+    it("matches snapshot", () => {
+        const tree = renderer.create(component).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 
     it("renders without crashing", () => {
         expect(wrapper.length).toEqual(1);        

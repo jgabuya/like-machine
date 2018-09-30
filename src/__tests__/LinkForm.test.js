@@ -1,19 +1,16 @@
 import React from "react";
-import LinkGroup from "../components/LinkGroup";
+import LinkForm from "../components/LinkForm";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
-import moment from 'moment';
 
-describe("LinkGroup", () => {
+describe("LinkForm", () => {
     const props = {
-        linkGroup: { timestamp: moment('1970-01-01').unix(), links: [] },
-        user: null,
-        onDelete: jest.fn(),
-        onLike: jest.fn(),
-        onUnlike: jest.fn()
+        onUrlInputChange: jest.fn(),
+        onSubmit: jest.fn(),
+        urlInputValue: ''
     };
 
-    const component = <LinkGroup {...props} />;
+    const component = <LinkForm {...props} />;
     const wrapper = shallow(component);
 
     it("matches snapshot", () => {
