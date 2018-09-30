@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinkItem matches snapshot 1`] = `
+<div
+  className="mb-5 card"
+>
+  <img
+    alt="test"
+    className="card-img-top"
+    src=""
+    style={
+      Object {
+        "maxHeight": "20vw",
+        "objectFit": "cover",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="card-body"
+  >
+    <h5
+      className="card-title"
+    >
+      <a
+        href="google.com/"
+        target="_blank"
+      >
+        test
+      </a>
+    </h5>
+    <h6
+      className="card-subtitle"
+    >
+      test
+    </h6>
+    <p
+      className="card-text"
+    >
+      <small
+        className="text-muted"
+        title="1969-12-31T16:00:00.000Z"
+      >
+        49 years ago
+      </small>
+    </p>
+  </div>
+</div>
+`;
