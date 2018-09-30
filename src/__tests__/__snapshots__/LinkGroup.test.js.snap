@@ -5,7 +5,7 @@ exports[`LinkGroup matches snapshot 1`] = `
   <h4
     className="mb-3 text-muted"
   >
-    September 30, 2018
+    January 1, 1970
   </h4>
 </div>
 `;
